@@ -58,22 +58,10 @@ FindFood:
             Goto ClickDura
             
             Break
-        } else {
-            Food++
-            if (food >= 7)
-            {
-                ToolTip "No Food!!"
-                Food = 1
-                
-            }
         }
     }
     return
 
-
-    
-    }
-        return
 
 Train:
 if (ScriptActive) {
@@ -87,12 +75,12 @@ if (ScriptActive) {
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\W.bmp
         if ErrorLevel = 0
         {				
-            SendInput, w 
+            SendInput, z 
         }		
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\A.bmp
         if ErrorLevel = 0
         {				
-            SendInput, a 
+            SendInput, q 
         }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\S.bmp
         if ErrorLevel = 0
