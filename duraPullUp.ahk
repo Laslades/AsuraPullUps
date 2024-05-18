@@ -1,8 +1,8 @@
-;Written by jash2260 on discord﻿
-SetTimer, OpenScript, 10 
-ScriptActive := False 
-StartMouseX := 0 
-StartMouseY := 0 
+; Written by jash2260 on discord
+SetTimer, OpenScript, 10
+ScriptActive := False
+StartMouseX := 0
+StartMouseY := 0
 macVersion := "v1.5"
 
 Gui, Add, Text, x10 y10 w200 h30, Welcome to Jash's Macro (Version: %macVersion%) :>
@@ -14,174 +14,99 @@ Gui, Add, Text, x10 y85 w200 h30, L = Exit Macro
 Gui, Add, Text, x10 y100 w200 h30, P = Pause Macro (Doesn't work)
 Gui, Show, x245 y700 w300 h115, Jash's Pull Up Macro
 
-
 OpenScript:
-     
-    SetTitleMatchMode, 2 
-    WinActivate, % "ahk_id " Roblox 
-    WinGet, Roblox, ID, ahk_exe RobloxPlayerBeta.exe 
-    WinMove, % "ahk_id " Roblox, , 0, 0, 810, 610 
-        	
+    SetTitleMatchMode, 2
+    WinActivate, % "ahk_id " Roblox
+    WinGet, Roblox, ID, ahk_exe RobloxPlayerBeta.exe
+    WinMove, % "ahk_id " Roblox, , 0, 0, 810, 610
+    ToolTip "Script is active!"
     return
-
-
-
-
-FindFood:
-    if (ScriptActive) {
-        
-        
-        Food = 1
-        
-        
-    Loop
-        
-    {
-        
-        ImageFileName := A_WorkingDir . "\bin\food\food" . Food . ".bmp"
-
-        ImageSearch, FoundX, FoundY, 260, 585, 509, 618, *100 %ImageFileName%
-        If ErrorLevel = 0
-        {
-            FoundX += 5
-            MouseMove, %FoundX%, %FoundY%
-            Sleep, 100
-            Click
-            Sleep, 100
-            MouseMove, 70, 470
-            Sleep, 100
-            Click
-            MouseMove, %FoundX%, %FoundY%
-            Sleep, 2000
-            Click
-            Sleep, 100
-            Goto ClickDura
-            
-            Break
-        } else {
-            Food++
-            if (food >= 7)
-            {
-                ToolTip "No Food!!"
-                Food = 1
-                
-            }
-        }
-    }
-    return
-
-
-    
-    }
-        return
 
 Train:
 if (ScriptActive) {
-    Sleep, 300
+    Sleep, 500  ; Temps de sommeil allongé
     StartTime := A_TickCount
-    ToolTip "FEAR NISSAN SILVIA ON ASURA!"
-    Loop
-    {
+    ToolTip "Training started!"
+    Loop {
+        if (!ScriptActive)
+            break  ; Sort de la boucle si le script est désactivé
         ElapsedTime := A_TickCount - StartTime
-    
+        ToolTip "Training in progress... Elapsed Time: " ElapsedTime
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\W.bmp
-        if ErrorLevel = 0
-        {				
-            SendInput, w 
-        }		
+        if (ErrorLevel = 0) {				
+            SendInput, z 
+        }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\A.bmp
-        if ErrorLevel = 0
-        {				
-            SendInput, a 
+        if (ErrorLevel = 0) {				
+            SendInput, q 
         }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\S.bmp
-        if ErrorLevel = 0
-        {				
-            Sendinput, s 
-        }			
+        if (ErrorLevel = 0) {				
+            SendInput, s 
+        }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\D.bmp
-        if ErrorLevel = 0
-        {				
-            Sendinput, d 
+        if (ErrorLevel = 0) {				
+            SendInput, d 
         }
-        
-        Sleep, 10
-
-        
-            if (ElapsedTime >= 60000)
-                {
-                    Goto ClickDura
-                    break
-                }
-                
+        Sleep, 50  ; Temps de sommeil allongé
+        if (ElapsedTime >= 60000) {
+            Goto ClickDura
+            break
+        }
     }
-}
-    return
-
-
-ClickDura:
-if (ScriptActive) {
-   
-    Loop
-        {
-        PixelSearch,,, 190, 125, 172, 125, 0x000000, 30, Fast ; detects food bar '190' default value
-        If ErrorLevel = 0
-        {
-            ToolTip "Is HUNGRY"
-            Goto FindFood
-        } else {
-             
-            MouseMove, %StartMouseX%, %StartMouseY%
-            Click
-            ToolTip "Searching..."
-            
-            ImageSearch,imagex, imagey, 335, 340, 485, 365, *100 %A_ScriptDir%\bin\durability.bmp
-            if ErrorLevel = 0
-                {				
-                    Sleep, 50
-                    MouseMove, %imagex%, %imagey%
-                    Sleep, 50
-                    Click
-                    Sleep, 50
-                    MouseMove, %imagex%, %imagey%
-                    Click
-                    Goto Train
-                    break
-                }else{
-                    ToolTip "Missing Dura Image"
-                    
-                }
-        }
-            
-            
-        }
 }
 return
 
+ClickDura:
+if (ScriptActive) {
+    ToolTip "Clicking on bar..."
+    ; Recherche et clic sur l'image bar.bmp
+    ImageSearch, imagex_bar, imagey_bar, 0, 0, 810, 610, *100 %A_ScriptDir%\bin\bar.bmp
+    if (ErrorLevel = 0) {				
+        Sleep, 200  ; Temps de sommeil allongé
+        MouseMove, %imagex_bar%, %imagey_bar%
+        Sleep, 200  ; Temps de sommeil allongé
+        Click
+        Sleep, 200  ; Temps de sommeil allongé
+    } else {
+        ToolTip "Image bar.bmp not found"
+        return
+    }
 
+    ToolTip "Searching for durability..."
+    ; Recherche de l'image durability.bmp
+    ImageSearch, imagex_dur, imagey_dur, 335, 340, 485, 365, *100 %A_ScriptDir%\bin\durability.bmp
+    if (ErrorLevel = 0) {				
+        Sleep, 200  ; Temps de sommeil allongé
+        MouseMove, %imagex_dur%, %imagey_dur%
+        Sleep, 200  ; Temps de sommeil allongé
+        Click
+        Sleep, 200  ; Temps de sommeil allongé
+        MouseMove, %imagex_dur%, %imagey_dur%
+        Click
+        ToolTip "Durability found!"
+        Goto Train
+    } else {
+        ToolTip "Durability Image not found"
+    }
+}
+return
 
-
-
-k:: ;main function to start the training process
-    ScriptActive := True ; Activate the script when you press "k"
-    SetTimer, OpenScript, On ; Start the timer
-    MouseGetPos, StartMouseX, StartMouseY ; Where to click to find the pull up bar
-    ImageSearch,,, 70, 50, 100, 67, *50 %A_ScriptDir%\bin\chat.bmp
-    if ErrorLevel = 0
-        {				
-            MouseMove, 82, 54
-                    Sleep, 50
-            Click
-        }
-        Sleep, 50
-    Goto ClickDura
+k:: ; fonction principale pour démarrer le processus d'entraînement
+    ScriptActive := True ; Activer le script lorsque vous appuyez sur "k"
+    SetTimer, OpenScript, On ; Démarrer le minuteur
+    MouseGetPos, StartMouseX, StartMouseY ; Où cliquer pour trouver la barre de traction
+    ToolTip "Searching for durability..."
+    ImageSearch,,, 335, 340, 485, 365, *100 %A_ScriptDir%\bin\durability.bmp
+    if (ErrorLevel = 0) {				
+        Goto ClickDura
+    }
     return
 
 p::
-    ScriptActive := False ; Deactivate the script when you press "p"
-    SetTimer, OpenScript, Off ; Stop the timer
-    
+    ScriptActive := False ; Désactiver le script lorsque vous appuyez sur "p"
+    SetTimer, OpenScript, Off ; Arrêter le minuteur
+    ToolTip "Script paused."
     return
 
-l::ExitApp ; Press "l" to exit the script
-
+l::ExitApp ; Appuyez sur "l" pour quitter le script
