@@ -122,14 +122,7 @@ if (ScriptActive) {
 ClickDura:
 if (ScriptActive) {
    
-    Loop
-        {
-        PixelSearch,,, 190, 125, 172, 125, 0x000000, 30, Fast ; detects food bar '190' default value
-        If ErrorLevel = 0
-        {
-            ToolTip "Is HUNGRY"
-            Goto FindFood
-        } else {
+    
              
             MouseMove, %StartMouseX%, %StartMouseY%
             Click
@@ -184,4 +177,3 @@ p::
     return
 
 l::ExitApp ; Press "l" to exit the script
-
