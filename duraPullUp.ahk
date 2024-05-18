@@ -26,55 +26,6 @@ OpenScript:
 
 
 
-
-FindFood:
-    if (ScriptActive) {
-        
-        
-        Food = 1
-        
-        
-    Loop
-        
-    {
-        
-        ImageFileName := A_WorkingDir . "\bin\food\food" . Food . ".bmp"
-
-        ImageSearch, FoundX, FoundY, 260, 585, 509, 618, *100 %ImageFileName%
-        If ErrorLevel = 0
-        {
-            FoundX += 5
-            MouseMove, %FoundX%, %FoundY%
-            Sleep, 100
-            Click
-            Sleep, 100
-            MouseMove, 70, 470
-            Sleep, 100
-            Click
-            MouseMove, %FoundX%, %FoundY%
-            Sleep, 2000
-            Click
-            Sleep, 100
-            Goto ClickDura
-            
-            Break
-        } else {
-            Food++
-            if (food >= 7)
-            {
-                ToolTip "No Food!!"
-                Food = 1
-                
-            }
-        }
-    }
-    return
-
-
-    
-    }
-        return
-
 Train:
 if (ScriptActive) {
     Sleep, 300
@@ -87,12 +38,12 @@ if (ScriptActive) {
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\W.bmp
         if ErrorLevel = 0
         {				
-            SendInput, w 
+            SendInput, z 
         }		
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\A.bmp
         if ErrorLevel = 0
         {				
-            SendInput, a 
+            SendInput, q 
         }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\S.bmp
         if ErrorLevel = 0
