@@ -87,12 +87,12 @@ if (ScriptActive) {
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\W.bmp
         if ErrorLevel = 0
         {				
-            SendInput, w 
+            SendInput, z 
         }		
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\A.bmp
         if ErrorLevel = 0
         {				
-            SendInput, a 
+            SendInput, q 
         }
         ImageSearch,,, 200, 209, 590, 235, *70 %A_ScriptDir%\bin\S.bmp
         if ErrorLevel = 0
@@ -121,15 +121,6 @@ if (ScriptActive) {
 
 ClickDura:
 if (ScriptActive) {
-   
-    Loop
-        {
-        PixelSearch,,, 190, 125, 172, 125, 0x000000, 30, Fast ; detects food bar '190' default value
-        If ErrorLevel = 0
-        {
-            ToolTip "Is HUNGRY"
-            Goto FindFood
-        } else {
              
             MouseMove, %StartMouseX%, %StartMouseY%
             Click
@@ -146,16 +137,13 @@ if (ScriptActive) {
                     MouseMove, %imagex%, %imagey%
                     Click
                     Goto Train
-                    break
+                    
                 }else{
                     ToolTip "Missing Dura Image"
                     
                 }
         }
             
-            
-        }
-}
 return
 
 
